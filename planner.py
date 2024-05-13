@@ -26,14 +26,14 @@ class TripPlanner:
             return "No suggestion available. Please provide more data."
 
     def _find_similar_places(self, last_visited):
-        # Simple placeholder method for suggesting similar places
-        similar_places = {
-            'Nairobi': ['Mombasa', 'Kisumu', 'Maasai Mara'],
-            'Mombasa': ['Nairobi', 'Diani Beach', 'Watamu'],
-            'Kisumu': ['Nairobi', 'Naivasha', 'Kakamega Forest'],
-            # Add more suggestions as needed
+        # Dictionary containing towns and their similar places
+        towns_and_similar_places = {
+            'Nairobi': ['Mombasa', 'Kisumu', 'Maasai Mara', 'Nakuru', 'Eldoret', 'Thika', 'Malindi', 'Kitale', 'Garissa', 'Kakamega', 'Nyeri', 'Machakos', 'Ruiru', 'Meru', 'Lamu'],
+            'Mombasa': ['Nairobi', 'Diani Beach', 'Watamu', 'Kisumu', 'Nakuru', 'Malindi', 'Kitale', 'Garissa', 'Kakamega', 'Nyeri', 'Machakos', 'Ruiru', 'Meru', 'Lamu'],
+            'Kisumu': ['Nairobi', 'Naivasha', 'Kakamega Forest', 'Mombasa', 'Nakuru', 'Eldoret', 'Thika', 'Malindi', 'Kitale', 'Garissa', 'Nyeri', 'Machakos', 'Ruiru', 'Meru', 'Lamu'],
+            # Add more towns and their similar places as needed
         }
-        return similar_places.get(last_visited, "No similar places found for the last visited location.")
+        return towns_and_similar_places.get(last_visited, "No similar places found for the last visited town.")
 
     def budget_estimation(self, destination):
         # Placeholder method for budget estimation based on destination
@@ -62,22 +62,31 @@ def main():
     # Create a TripPlanner instance
     trip_planner = TripPlanner(user_data)
 
-    # Get suggestions
-    suggestions = trip_planner.suggest_places()
+    # Search bar for user input
+    destination = input("Enter a destination town in Kenya: ")
+
+    # Get suggestions based on user input
+    suggestions = trip_planner._find_similar_places(destination)
 
     # Display suggestions
     print("Suggestions for your next trip:")
     print(suggestions)
 
-    # Calculate distance between Nairobi and Mombasa
+    # Calculate distance between Nairobi and the destination
     nairobi = (-1.286389, 36.817223)
-    mombasa = (-4.0435, 39.6682)
-    distance_nairobi_mombasa = trip_planner.calculate_distance(nairobi, mombasa)
-    print(f"The distance between Nairobi and Mombasa is approximately {distance_nairobi_mombasa:.2f} kilometers.")
+    destination_coords = {
+        'Nairobi': nairobi,
+        'Mombasa': (-4.0435, 39.6682),
+        'Kisumu': (-0.0917, 34.7679),
+        # Add coordinates for other destinations
+    }
+    if destination in destination_coords:
+        distance_nairobi_destination = trip_planner.calculate_distance(nairobi, destination_coords[destination])
+        print(f"The distance between Nairobi and {destination} is approximately {distance_nairobi_destination:.2f} kilometers.")
 
-    # Estimate budget for Mombasa trip
-    budget_mombasa = trip_planner.budget_estimation('Mombasa')
-    print(f"Estimated budget for a trip to Mombasa: KES {budget_mombasa:.2f}")
+    # Estimate budget for the destination
+    budget_destination = trip_planner.budget_estimation(destination)
+    print(f"Estimated budget for a trip to {destination}: KES {budget_destination:.2f}")
 
 
 if __name__ == "__main__":
