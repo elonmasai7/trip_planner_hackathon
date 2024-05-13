@@ -15,7 +15,7 @@ git clone https://github.com/elonmasai/trip_planner_hackathon.git
 
 2. Navigate to the project directory:
 
-3. Run the `trip_planner.py` file:
+3. Run the `trip_planner_hackathon.git` file:
 
 4. Follow the on-screen instructions to input the destination town in Kenya.
 
