@@ -5,7 +5,7 @@ class TripPlanner:
         self.user_data = user_data
 
     def calculate_distance(self, origin, destination):
-        # Calculate the distance between two coordinates using Haversine formula
+        
         lat1, lon1 = origin
         lat2, lon2 = destination
         lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
@@ -26,7 +26,7 @@ class TripPlanner:
             return "No suggestion available. Please provide more data."
 
     def _find_similar_places(self, last_visited):
-        # Dictionary containing towns and their similar places
+        
         towns_and_similar_places = {
             'Nairobi': ['Mombasa', 'Kisumu', 'Maasai Mara', 'Nakuru', 'Eldoret', 'Thika', 'Malindi', 'Kitale', 'Garissa', 'Kakamega', 'Nyeri', 'Machakos', 'Ruiru', 'Meru', 'Lamu'],
             'Mombasa': ['Nairobi', 'Diani Beach', 'Watamu', 'Kisumu', 'Nakuru', 'Malindi', 'Kitale', 'Garissa', 'Kakamega', 'Nyeri', 'Machakos', 'Ruiru', 'Meru', 'Lamu'],
